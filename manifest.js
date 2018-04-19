@@ -1,6 +1,7 @@
 // @ts-check
 /// <reference path="./node-modules/express-gateway/index.d.ts" />
 const session = require('express-session');
+const RedisStore = require('connect-redis')(session);
 
 /** @type {ExpressGateway.Plugin} */
 const plugin = {
@@ -29,6 +30,10 @@ const plugin = {
             },                                                                                                 
             policy: (actionParams) => {
                 return session({
+                    store: new RedisStore({
+                        host: actionParams.store.host,
+                        port: actionParams.store.port
+                    }),
                     secret: actionParams.secret,
                     resave: actionParams.resave,
                     saveUninitialized: actionParams.saveUninitialized
