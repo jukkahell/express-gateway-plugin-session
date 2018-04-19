@@ -14,6 +14,7 @@
         "jest": "^22.4.3"
     },
     "dependencies": {
+        "connect-redis": "^3.3.3",
         "express-session": "^1.15.6"
     }
 }
